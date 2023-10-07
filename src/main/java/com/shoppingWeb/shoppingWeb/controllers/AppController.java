@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
+
 
 @Controller
 public class AppController {
@@ -29,10 +31,13 @@ public class AppController {
     }
 
     @GetMapping("/sparkle")
-    public String homepage() {
-
+    public String homepage(Principal principal,Model model) {
+        String username = principal.getName();
+        model.addAttribute("username",username);
         return "sparkle";
     }
+
+
 
     @PostMapping("/process_register")
     public String processRegister(User user) {
