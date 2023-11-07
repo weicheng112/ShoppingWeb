@@ -17,13 +17,14 @@ public class UserController {
     private UserService userService;
 
 
-    //用戶註冊
+
+
     @PostMapping("/register")
     public String create(@RequestBody User user){
         return userService.CreateUser(user);
     }
 
-    //用戶登入
+
     @PostMapping("/userlogin")
     public List<User> userlogin(HttpSession session, @RequestBody User user){
         List<User> list =new ArrayList<>();
@@ -33,40 +34,41 @@ public class UserController {
         System.out.println("---------------------------");
         System.out.println("---------------------------");
         list =userService.login(user.getUsername(),user.getPassword());
-        //登入成功後設置session的值
+        //after login, store to session
         session.setAttribute("uid",list.get(0).getUid());
         session.setAttribute("username",list.get(0).getUsername());
 
         return (list);
     }
 
-    @PutMapping("users/{uid}") //根據帳號做修改
-    public String update(@PathVariable Integer uid,@RequestBody User user){ //@Path用來取得url路徑的值
-
+    @PutMapping("users/{uid}")
+    public String update(@PathVariable Integer uid,@RequestBody User user){
+        // using parameter to store uid
         return userService.UpdateByUid(uid,user);
     }
 
     @GetMapping("users/{username}")
-    public List<User> read(@PathVariable String username){ //@Path用來取得url路徑的值
+    public List<User> read(@PathVariable String username){
+        // using parameter to store username
 
         return userService.ReadByUsername(username);
     }
 
 
 
-    //用來獲取session中的username，在前端某些需要的地方會用到。
+
     @GetMapping("users/session-username")
     public  String getsessionusername(HttpSession session){ //@Path用來取得url路徑的值
         return (String)session.getAttribute("username");
     }
 
-    //用戶登出
+
     @GetMapping("/sign_out")
     public String signout(HttpSession session){
-        //銷毀session中的KV
+        //destroy the session
         session.removeAttribute("uid");
         session.removeAttribute("username");
-        return "登出成功";
+        return "logout success!";
     }
 
 

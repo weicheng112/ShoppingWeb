@@ -14,7 +14,8 @@ $("#enter").click(function () {
         data:JSON.stringify({"username":username,"password":password}),
         success:function(res) {
             //console.log(res);
-            window.location.href = apiurl.successloginurl;//正確登入後頁面跳轉
+            window.location.href = apiurl.successloginurl;
+
         }
     });
 

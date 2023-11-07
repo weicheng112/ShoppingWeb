@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
@@ -15,14 +18,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-/*
-        //在這個patterns裡面就是不用登入的
+
+
         List<String> patterns = new ArrayList<>();
         patterns.add("/user_login");
         patterns.add("/static/**");
-*/
 
-        //有些之後會用到
+
+        // after we login in, we could view those pages
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/login_success")
                 .addPathPatterns("/carts/**")

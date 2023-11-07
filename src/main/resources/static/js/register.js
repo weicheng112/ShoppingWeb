@@ -18,8 +18,8 @@ $("#sub").click(function () {
         data:JSON.stringify({"username":username,"password":password,"gender":gender,"phone":phone,"email":email}),
 
       success:function(res) {
-            alert("註冊成功");
-            window.location.href = apiurl.registersuccess;//正確登入後頁面跳轉
+            alert("register_success");
+            window.location.href = apiurl.registersuccess; // switch the page
         }
     });
 

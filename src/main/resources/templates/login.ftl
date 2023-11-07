@@ -2,16 +2,17 @@
 <html lang="zh-tw" >
 <head>
   <meta charset="UTF-8">
-  <title>Springboot 登入頁面</title>
+  <title>Sparkle pin shopping website</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css'>
     <link rel="stylesheet" href="/static/css/login.css">
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
+<div class="container-fluid"><a class="navbar-brand" href="/">Sparkle pin</a>
 <main class="form-signin">
-    <h1 class="mb-3">springboot實戰</h1>
-    <h1 class="h4 mb-3 fw-normal">登入頁面</h1>
+    <h1 class="mb-3">Sparkle pin user login</h1>
+    <h1 class="h4 mb-3 fw-normal">Login Page</h1>
     <!--form class="form-signin" method="post" action="/security/login"-->
         <div class="form-floating">
           <input class="form-control" id="username" name="username"/>
@@ -24,12 +25,12 @@
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"/>
-            保持登入
+            Stay logged in
           </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" id="enter">登入</button>
+        <button class="w-100 btn btn-lg btn-primary" id="enter">login</button>
     <!--/form-->
-    <p class="mt-5 mb-3 text-muted">網頁參考https://bootstrap5.hexschool.com/docs/5.0/examples/sign-in/</p>
+
 </main>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.min.js'></script>

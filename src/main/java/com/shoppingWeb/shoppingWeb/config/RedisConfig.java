@@ -18,43 +18,24 @@ import java.time.Duration;
 @EnableCaching
 public class RedisConfig extends CachingConfigurerSupport {
 
-    /*
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory factory) {
-
-        RedisSerializationContext.SerializationPair<Object> pair = RedisSerializationContext.SerializationPair
-                .fromSerializer(new GenericJackson2JsonRedisSerializer());
-        RedisCacheConfiguration defaultCacheConfig = RedisCacheConfiguration.defaultCacheConfig()
-                .serializeValuesWith(pair) // 序列化方式
-                .entryTtl(Duration.ofHours(1)); // 過期時間
-
-        return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(factory))
-                .cacheDefaults(defaultCacheConfig).build();
-    }
-
-     */
 
     @Bean
     /*
-    RedisTemplate<key, value>一般來說都是以String, String資料儲存，但如果像我們要儲存使用者資訊，簡單說
-    就是物件,就可以改成<String, Object>，
-    再來是redisTemplate(RedisConnectionFactory factory)，固定寫法，連結工廠
+    RedisTemplate<key, value> the data is stored as String, String data, but if we want to store user information, simply put, we can change it to
+    is an object, it can be changed to <String, Object>，
+    redisTemplate(RedisConnectionFactory factory)，connect to the factory
     */
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        //key值序列化
+
+
+        //key serializer
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        //默認的是二進制，但是出來的值會比較長，就是下面的jdk
-        //redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        //再來是json格式的序列化，但是要把object傳進去
-        //redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<Object>());
-        //所以選擇這個，他也是json數據，但是不需要把object傳進去
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        //固定寫法，注入連結工廠,不寫會報錯
-        //hash設定，（hash就是用來儲存key&value的地方）
-        //hash類型 key序列化
+
+        //hash type key serializer
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-        //hash類型，value序列化
+        //hash，value serializer
         redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
         redisTemplate.setConnectionFactory(factory);
         return redisTemplate;

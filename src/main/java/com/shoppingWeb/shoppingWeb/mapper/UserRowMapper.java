@@ -13,7 +13,7 @@ public class UserRowMapper implements RowMapper<User> {
 
         User user=new User();
 
-        //後面result.getxx()，()裡面放的是要取得的資料在資料庫中的名字
+
         user.setUid(resultSet.getInt("uid"));
         user.setUsername(resultSet.getString("username"));
         user.setPassword(resultSet.getString("password"));

@@ -12,12 +12,14 @@ public class  LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+
+        // check if user login or not
         if (request.getSession().getAttribute("uid") == null) {
-            System.out.println("session中的uid為null");
+            System.out.println("there's no session ");
             response.setStatus(302);
             return false;
         }
-        //System.out.println("session中的uid為= " + request.getSession().getAttribute("uid"));
+
         return true;
     }
 }
